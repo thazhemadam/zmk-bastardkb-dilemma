@@ -8,10 +8,10 @@ manifest:
       url-base: https://github.com/paulshir
   projects:
     - name: zmk
-      # remote: zmkfirmware
-      # revision: main
-      remote: paulshir
-      revision: main+pio-led
+      remote: zmkfirmware
+      revision: main
+      # remote: paulshir
+      # revision: main+pio-led
       # revision: paulshir
       # revision: split-serial-pr+pio-led
       import: app/west.yml
