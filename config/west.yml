@@ -15,8 +15,5 @@ manifest:
       # revision: paulshir
       # revision: split-serial-pr+pio-led
       import: app/west.yml
-    - name: zmk-behaviors-dev
-      remote: paulshir
-      revision: main
   self:
     path: config
