@@ -123,22 +123,34 @@ zephyr_udc0: &usbd {
 &pio1 {
     status = "okay";
 
-    pio1_ws2812: ws2812 {
-        compatible = "worldsemi,ws2812-rpi_pico-pio";
-        status = "okay";
+    pio1_spi1: pio1_spi1 {
         pinctrl-0 = <&pio1_ws2812_default>;
         pinctrl-names = "default";
-        bit-waveform = <3>, <3>, <4>;
 
-        led_strip: led_strip {
-            status = "okay";
-            gpios = <&gpio0 10 GPIO_ACTIVE_HIGH>;
+        compatible = "raspberrypi,pico-spi-pio";
+        #address-cells = <1>;
+        #size-cells = <0>;
+        clocks = <&system_clk>;
+        clock-frequency = <4000000>;
+
+        clk-gpios = <&gpio0 14 GPIO_ACTIVE_HIGH>;  /* Must be defined. Select a pin that is not used elsewhere. */
+        mosi-gpios = <&gpio0 10 GPIO_ACTIVE_HIGH>; /* Data In pin. */
+        miso-gpios = <&gpio0 10 GPIO_ACTIVE_HIGH>; /* Must be defined. Re-using the DI pin is OK for WS2812. */
+
+        led_strip: ws2812@0 {
+            compatible = "worldsemi,ws2812-spi";
+
+            /* SPI */
+            reg = <0>; /* ignored, but necessary for SPI bindings */
+            spi-max-frequency = <4000000>;
+
+            /* WS2812 */
             chain-length = <36>;
+            spi-one-frame = <0x70>;
+            spi-zero-frame = <0x40>;
             color-mapping = <LED_COLOR_ID_GREEN
-                     LED_COLOR_ID_RED
-                     LED_COLOR_ID_BLUE>;
-            reset-delay = <280>;
-            frequency = <800000>;
+                             LED_COLOR_ID_RED
+                             LED_COLOR_ID_BLUE>;
         };
     };
 };
