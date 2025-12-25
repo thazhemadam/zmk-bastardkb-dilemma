@@ -1,0 +1,11 @@
+boards:
+  - name: dilemma_left
+    full_name: BastardKB Dilemma Left
+    vendor: bastardkb
+    socs:
+      - name: rp2040
+  - name: dilemma_right
+    full_name: BastardKB Dilemma Right
+    vendor: bastardkb
+    socs:
+      - name: rp2040
