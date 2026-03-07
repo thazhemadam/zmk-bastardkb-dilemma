@@ -5,6 +5,7 @@
 
 config BOARD_DILEMMA_LEFT
     select SOC_RP2040
+    select ZMK_BOARD_COMPAT
     select RP2_FLASH_W25Q080
     imply RETAINED_MEM
     imply RETENTION
